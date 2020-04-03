@@ -1,7 +1,7 @@
 ![Image of keyboard](keyboard.jpg)
 
 # qmk-atreus62
-Layout for my Atreus62 keyboard
+Firmware for my Atreus62 keyboard
 
 ## Installation
 
