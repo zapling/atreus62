@@ -5,19 +5,25 @@ Layout for my Atreus62 keyboard
 
 ## Installation
 
-* Download the [qmk_firmware](https://github.com/qmk/qmk_firmware)
-* Put the `keymap.c` in `keyboards/atreus62/keymaps/zapling/` folder.
+[QMK Firmware](https://github.com/qmk/qmk_firmware) is needed. It can be downloaded and setup via
+
+```
+make qmk
+```
+
+This will download QMK into a `qmk_firmware` folder. It will also create a symlink to the `zapling`
+folder.
 
 ## Compile
 
 ```
-qmk compile -kb atreus62 -km zapling
+make compile
 ```
 
 ## Flash
 
 ```
-qmk flash -kb atreus62 -km zapling
+make flash
 ```
 
 Put the keyboard in `RESET` mode, either via keypress or via hard reset.
