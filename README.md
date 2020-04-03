@@ -1,7 +1,9 @@
 ![Image of keyboard](keyboard.jpg)
 
 # qmk-atreus62
-Firmware for my Atreus62 keyboard
+Firmware for my Atreus62 keyboard.
+
+If you're interested in getting yourself an Atreus62 keyboards it can be purchased from [Profet Keyboards](https://shop.profetkeyboards.com/product/atreus62-keyboard).
 
 ## Installation
 
