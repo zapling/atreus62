@@ -4,24 +4,61 @@
 #define _NAV 1
 #define _RESET 2
 
+const char L_AR[] = "0x00e5"; // å
+const char U_AR[] = "0x00c5"; // Å
+
+const char L_AD[] = "0x00e4"; // ä
+const char U_AD[] = "0x00c4"; // Ä
+
+const char L_OD[] = "0x00f6"; // ö
+const char U_OD[] = "0x00d6"; // Ö
+
 enum custom_keys {
-  AR,
-  AD,
-  OD,
-  U_AR,
-  U_AD,
-  U_OD,
+  KEY_AR = SAFE_RANGE,
+  KEY_AD,
+  KEY_OD
 };
 
-const uint32_t PROGMEM unicode_map[] = {
-  [AR]   = 0x00E5, // å
-  [U_AR] = 0x00C5, // Å
+bool shift_pressed(void) {
+  if (keyboard_report->mods & MOD_BIT(KC_LSFT) || keyboard_report->mods & MOD_BIT(KC_RSFT)) {
+    return true;
+  }
+  return false;
+}
 
-  [AD]   = 0x00E4, // ä
-  [U_AD] = 0x00C4, // Ä
+void send_unicode_char(const char* chars) {
+  SEND_STRING(
+    SS_DOWN(X_LCTL)
+    SS_DOWN(X_LSFT)
+    "u"
+    SS_UP(X_LCTL)
+    SS_UP(X_LSFT)
+  );
+  send_string(chars); // lowercase in order to send 'char' as param
+  SEND_STRING(SS_TAP(X_ENT));
+}
 
-  [OD]   = 0x00F6, // ö
-  [U_OD] = 0x00D6, // Ö
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KEY_AR: // å key
+      if (record->event.pressed) {
+        shift_pressed() ? send_unicode_char(U_AR) : send_unicode_char(L_AR);
+      }
+      break;
+
+    case KEY_AD: // ä key
+      if (record->event.pressed) {
+        shift_pressed() ? send_unicode_char(U_AD) : send_unicode_char(L_AD);
+      }
+      break;
+
+    case KEY_OD: // ö key
+      if (record->event.pressed) {
+        shift_pressed() ? send_unicode_char(U_OD) : send_unicode_char(L_OD);
+      }
+      break;
+  }
+  return true;
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -34,11 +71,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NAV] = LAYOUT(
-    KC_F1,         KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,                        KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,        KC_F12,
-    XP(AR, U_AR),  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_TRNS,       KC_TRNS,
-    KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_END,   KC_LEFT,  KC_DOWN,  KC_RGHT,  XP(OD, U_OD),  XP(AD, U_AD),
-    KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,       KC_TRNS,
-    KC_TRNS,       TO(2),    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,       KC_TRNS
+    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,                        KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,
+    KEY_AR,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_END,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KEY_OD,   KEY_AD,
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,  TO(2),    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS
   ),
 
   [_RESET] = LAYOUT(
