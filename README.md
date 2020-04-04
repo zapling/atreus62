@@ -19,7 +19,7 @@ The layout is based on a US layout with some modifications. It also allows for i
 | `FN` + (`shift`) + `'` | `ä`, `Ä` |
 | `FN` + (`shift`) + `;` | `ö`, `Ö` |
 
-Typing `åäö` is normally not possible while under a US layout, but is possible though to the unicode input mode available in Linux via the (`crtl` + `shift` + `u`) combination. You can read more about unicode input at [QMKs Unicode section](https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#input-modes).
+Typing `åäö` is normally not possible while under a US layout, but is possible though to the unicode input mode available in Linux via the (`ctrl` + `shift` + `u`) combination. You can read more about unicode input at [QMKs Unicode section](https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#input-modes).
 
 Feel free to use any code and implement it in your own layout.
 
