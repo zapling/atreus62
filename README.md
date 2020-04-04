@@ -11,6 +11,7 @@ The layout is based on a US layout with some modifications. It also allows for i
 
 | Key combo     | Output        |
 | ------------- |:-------------:|
+| `shift` + `ESC` | `~` |
 | `FN` + (`i`, `j`, `k`, `l`) | Arrow keys |
 | `FN` + (`y`, `h`) | `Home`, `End` |
 | `FN` + (`u`, `o`) | `Page up`, `Page down` |
@@ -18,6 +19,7 @@ The layout is based on a US layout with some modifications. It also allows for i
 | `FN` + (`shift`) + `[` | `å`, `Å` |
 | `FN` + (`shift`) + `'` | `ä`, `Ä` |
 | `FN` + (`shift`) + `;` | `ö`, `Ö` |
+| `FN` + `e` | `€` |
 
 Typing `åäö` is normally not possible while under a US layout, but is possible though to the unicode input mode available in Linux via the (`ctrl` + `shift` + `u`) combination. You can read more about unicode input at [QMKs Unicode section](https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#input-modes).
 
