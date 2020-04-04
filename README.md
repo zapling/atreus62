@@ -14,7 +14,7 @@ The layout is based on a US layout with some modifications. It also allows for i
 | `FN` + (`i`, `j`, `k`, `l`) | Arrow keys |
 | `FN` + (`y`, `h`) | `Home`, `End` |
 | `FN` + (`u`, `o`) | `Page up`, `Page down` |
-| `FN` + (`ESC` to `+` row ) | `F1`, `F2` etc |
+| `FN` + (`ESC`, `1` ... `=` ) | `F1`, `F2`, ... `F12` |
 | `FN` + (`shift`) + `[` | `å`, `Å` |
 | `FN` + (`shift`) + `'` | `ä`, `Ä` |
 | `FN` + (`shift`) + `;` | `ö`, `Ö` |
