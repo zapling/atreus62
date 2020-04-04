@@ -13,10 +13,13 @@ const char U_AD[] = "0x00c4"; // Ä
 const char L_OD[] = "0x00f6"; // ö
 const char U_OD[] = "0x00d6"; // Ö
 
+const char EURO_SIGN[] = "0x20ac"; // €
+
 enum custom_keys {
   KEY_AR = SAFE_RANGE,
   KEY_AD,
-  KEY_OD
+  KEY_OD,
+  KEY_EUR
 };
 
 bool shift_pressed(void) {
@@ -57,6 +60,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         shift_pressed() ? send_unicode_char(U_OD) : send_unicode_char(L_OD);
       }
       break;
+
+    case KEY_EUR: // €
+      if (record->event.pressed) {
+        send_unicode_char(EURO_SIGN);
+      }
   }
   return true;
 };
@@ -72,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT(
     KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,                        KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,
-    KEY_AR,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_TRNS,  KC_TRNS,
+    KEY_AR,   KC_TRNS,  KC_TRNS,  KEY_EUR,  KC_TRNS,  KC_TRNS,                      KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_TRNS,  KC_TRNS,
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_END,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KEY_OD,   KEY_AD,
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
     KC_TRNS,  TO(2),    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS
