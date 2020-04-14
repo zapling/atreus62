@@ -12,7 +12,7 @@ The layout is based on a US layout with some modifications. It also allows for i
 | Key combo     | Output        |
 | ------------- |:-------------:|
 | `shift` + `ESC` | `~` |
-| `FN` + (`i`, `j`, `k`, `l`) | Arrow keys |
+| `FN` + (`i`, `j`, `k`, `l`) | `🠡`, `🠠`, `🠣`, `🠢` |
 | `FN` + (`y`, `h`) | `Home`, `End` |
 | `FN` + (`u`, `o`) | `Page up`, `Page down` |
 | `FN` + (`ESC`, `1` ... `=` ) | `F1`, `F2`, ... `F12` |
