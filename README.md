@@ -25,6 +25,10 @@ Typing `åäö` is normally not possible while under a US layout, but is possibl
 
 Feel free to use any code and implement it in your own layout.
 
+### Notice
+
+Some applications doesn't support the (`ctrl` + `shift` + `u`) way to input unicode. As of right now, there is no known way to circumvent this. One workaround is to temporarily change the keyboard layout to Swedish in software.
+
 ## Installation
 
 [QMK Firmware](https://github.com/qmk/qmk_firmware) is needed. It can be installed with the following command. Note that you might need to run this command as `sudo`.
