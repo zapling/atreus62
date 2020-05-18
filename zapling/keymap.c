@@ -1,35 +1,48 @@
 #include QMK_KEYBOARD_H
 
+// Layers
 #define _DEFAULT 0
 #define _NAV 1
 #define _RESET 2
 
-const char L_AR[] = "0x00e5"; // å
-const char U_AR[] = "0x00c5"; // Å
-
-const char L_AD[] = "0x00e4"; // ä
-const char U_AD[] = "0x00c4"; // Ä
-
-const char L_OD[] = "0x00f6"; // ö
-const char U_OD[] = "0x00d6"; // Ö
-
-const char EURO_SIGN[] = "0x20ac"; // €
-
+// Custom bindable keys
 enum custom_keys {
-  KEY_AR = SAFE_RANGE,
-  KEY_AD,
-  KEY_OD,
+  KC_A_DIACRITIC = SAFE_RANGE,
+  KC_A_DIAERESIS,
+  KC_O_DIAERESIS,
   KEY_EUR
 };
 
-bool shift_pressed(void) {
+// Custom unicode characters
+const char LOWER_A_DIACRITIC[] = "0x00e5"; // å
+const char UPPER_A_DIACRITIC[] = "0x00c5"; // Å
+
+const char LOWER_A_DIAERESIS[] = "0x00e4"; // ä
+const char UPPER_A_DIAERESIS[] = "0x00c4"; // Ä
+
+const char LOWER_O_DIAERESIS[] = "0x00f6"; // ö
+const char UPPER_O_DIAERESIS[] = "0x00d6"; // Ö
+
+const char EURO_SIGN[] = "0x20ac"; // €
+
+/**
+* Return true if the shift modifier pressed
+*/
+bool is_shift_pressed(void) {
   if (keyboard_report->mods & MOD_BIT(KC_LSFT) || keyboard_report->mods & MOD_BIT(KC_RSFT)) {
     return true;
   }
   return false;
 }
 
-void send_unicode_char(const char* chars) {
+/**
+* Print a custom unicode character
+* Uses the linux unicode input mode in order to convert the unicode to a real character.
+* This might not always work, depending on the application.
+*
+* Uses the function 'send_string' in lowercase that allows for a char param.
+*/
+void print_unicode_char(const char* chars) {
   SEND_STRING(
     SS_DOWN(X_LCTL)
     SS_DOWN(X_LSFT)
@@ -37,38 +50,44 @@ void send_unicode_char(const char* chars) {
     SS_UP(X_LCTL)
     SS_UP(X_LSFT)
   );
-  send_string(chars); // lowercase in order to send 'char' as param
+  send_string(chars);
   SEND_STRING(SS_TAP(X_ENT));
 }
 
+/**
+* Process the key press and handle the logic for custom keys.
+*/
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KEY_AR: // å key
+    case KC_A_DIACRITIC: // å key
       if (record->event.pressed) {
-        shift_pressed() ? send_unicode_char(U_AR) : send_unicode_char(L_AR);
+        is_shift_pressed() ? print_unicode_char(UPPER_A_DIACRITIC) : print_unicode_char(LOWER_A_DIACRITIC);
       }
       break;
 
-    case KEY_AD: // ä key
+    case KC_A_DIAERESIS: // ä key
       if (record->event.pressed) {
-        shift_pressed() ? send_unicode_char(U_AD) : send_unicode_char(L_AD);
+        is_shift_pressed() ? print_unicode_char(UPPER_A_DIAERESIS) : print_unicode_char(LOWER_A_DIAERESIS);
       }
       break;
 
-    case KEY_OD: // ö key
+    case KC_O_DIAERESIS: // ö key
       if (record->event.pressed) {
-        shift_pressed() ? send_unicode_char(U_OD) : send_unicode_char(L_OD);
+        is_shift_pressed() ? print_unicode_char(UPPER_O_DIAERESIS) : print_unicode_char(LOWER_O_DIAERESIS);
       }
       break;
 
     case KEY_EUR: // €
       if (record->event.pressed) {
-        send_unicode_char(EURO_SIGN);
+        print_unicode_char(EURO_SIGN);
       }
   }
   return true;
 };
 
+/**
+* Custom keyboard layout
+*/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DEFAULT] = LAYOUT(
     KC_GESC,  KC_1,   KC_2,     KC_3,   KC_4,     KC_5,                       KC_6,    KC_7,     KC_8,     KC_9,     KC_0,     KC_EQL,
@@ -79,11 +98,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NAV] = LAYOUT(
-    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,                        KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,
-    KEY_AR,   KC_TRNS,  KC_TRNS,  KEY_EUR,  KC_TRNS,  KC_TRNS,                      KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_END,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KEY_OD,   KEY_AD,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,  TO(2),    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS
+    KC_F1,            KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,                        KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,           KC_F12,
+    KC_A_DIACRITIC,   KC_TRNS,  KC_TRNS,  KEY_EUR,  KC_TRNS,  KC_TRNS,                      KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_TRNS,          KC_TRNS,
+    KC_TRNS,          KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_END,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_O_DIAERESIS,   KC_A_DIAERESIS,
+    KC_TRNS,          KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,          KC_TRNS,
+    KC_TRNS,          TO(2),    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,          KC_TRNS
   ),
 
   [_RESET] = LAYOUT(
