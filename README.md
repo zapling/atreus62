@@ -11,17 +11,23 @@ The layout is based on a US layout with some modifications. It also allows for i
 
 | Key combo     | Output        |
 | ------------- |:-------------:|
-| `FN` + (`i`, `j`, `k`, `l`) | Arrow keys |
+| `shift` + `ESC` | `~` |
+| `FN` + (`i`, `j`, `k`, `l`) | `🠡`, `🠠`, `🠣`, `🠢` |
 | `FN` + (`y`, `h`) | `Home`, `End` |
 | `FN` + (`u`, `o`) | `Page up`, `Page down` |
 | `FN` + (`ESC`, `1` ... `=` ) | `F1`, `F2`, ... `F12` |
 | `FN` + (`shift`) + `[` | `å`, `Å` |
 | `FN` + (`shift`) + `'` | `ä`, `Ä` |
 | `FN` + (`shift`) + `;` | `ö`, `Ö` |
+| `FN` + `e` | `€` |
 
 Typing `åäö` is normally not possible while under a US layout, but is possible though to the unicode input mode available in Linux via the (`ctrl` + `shift` + `u`) combination. You can read more about unicode input at [QMKs Unicode section](https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#input-modes).
 
 Feel free to use any code and implement it in your own layout.
+
+### Notice
+
+Some applications doesn't support the (`ctrl` + `shift` + `u`) way to input unicode. As of right now, there is no known way to circumvent this. One workaround is to temporarily change the keyboard layout to Swedish in software.
 
 ## Installation
 
