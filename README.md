@@ -12,9 +12,9 @@ The layout is based on a US layout with some modifications. It also allows for i
 | Key combo     | Output        |
 | ------------- |:-------------:|
 | `shift` + `ESC` | `~` |
-| `FN` + (`i`, `j`, `k`, `l`) | `🠡`, `🠠`, `🠣`, `🠢` |
-| `FN` + (`y`, `h`) | `Home`, `End` |
-| `FN` + (`u`, `o`) | `Page up`, `Page down` |
+| `FN` + (`h`, `j`, `k`, `l`) | `🠠`, `🠣`, `🠡`, `🠢` |
+| `FN` + (`y`, `o`) | `Home`, `End` |
+| `FN` + (`u`, `i`) | `Page up`, `Page down` |
 | `FN` + (`ESC`, `1` ... `=` ) | `F1`, `F2`, ... `F12` |
 | `FN` + (`shift`) + `[` | `å`, `Å` |
 | `FN` + (`shift`) + `'` | `ä`, `Ä` |
