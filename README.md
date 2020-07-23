@@ -3,7 +3,7 @@
 # qmk-atreus62
 This is my custom firmware for my Atreus62 keyboard.
 
-If you're interested in getting yourself an Atreus62 keyboards, it can be purchased from [Profet Keyboards](https://shop.profetkeyboards.com/product/atreus62-keyboard). It can be purchased pre-assembled or with parts so you can assamble it your own.
+If you're interested in getting yourself an Atreus62 keyboards, it can be purchased from [Profet Keyboards](https://shop.profetkeyboards.com/product/atreus62-keyboard). It can be purchased pre-assembled or with parts so you can assamble it on your own.
 
 ## About
 
@@ -13,19 +13,19 @@ Input of Swedish characters under US layout is achieved with the unicode input m
 
 _This mode is not accesible under Windows, and therefore this layout might not work as expected for those users._
 
-Some applications behave unexpectedly when trying to input characters this way, resulting in some weird behaviour. To circumvent this, one workaround is to temporarily change the keyboard layout to Swedish in your OS. 
+Some applications behave unexpectedly when trying to input characters this way, resulting in some weird behaviour. To circumvent this, one workaround is to temporarily change the keyboard layout to Swedish in your OS. If you know a better way, please consider creating a PR.
 
 ## Installation
 
-Putting this layout on your keyboard consists of two steps, compiling and flashing. In order to do these we first need to get the [QMK Firmware](https://github.com/qmk/qmk_firmware). It can easily be installed via the following command.
+Installing this layout to your keyboard consists of two steps, compiling and flashing, but first you need to get the [QMK Firmware](https://github.com/qmk/qmk_firmware). It can easily be installed via the following command.
 
 ```
 make qmk
 ```
 
-After installing QMK you are free to do any changes you want to the layout, altough it should be fine without any.
-
 ### Compile
+
+When you feel done with the layout, and all eventual changes are done etc, it's time to compile the firmware.
 
 ```
 make compile
@@ -33,11 +33,15 @@ make compile
 
 ### Flash
 
+When you have compiled your firmware it's time to flash it to your keyboard. I'ts important that you understand that this will override the current firmware on your keyboard, so if you have any changes that are not backed-up, they will be lost.
+
 ```
 make flash
 ```
 
 ## Layout
+
+The layout consists of two layers. The Function layer is accesible while holding the `Fn` key.
 
 ### Layer: 0 (Normal)
 
