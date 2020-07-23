@@ -85,15 +85,15 @@ The reset layer, only serves one function, reseting the keyboard so it can be fl
 
 ```
 ,-----------------------------------------.              ,-----------------------------------------.
-|      |      |      |      |      |      |              |      |      |      |      |      |      |
+|Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|              |Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|
 |------+------+------+------+------+------|              |------+------+------+------+------+------|
-|      |      |      |      |      |      |              |      |      |      |      |      |      |
+|Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|              |Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|
 |------+------+------+------+------+------|              |------+------+------+------+------+------|
-|      |      |      |      |      |      |              |      |      |      |      |      |      |
+|Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|              |Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|
 |------+------+------+------+------+------|------.,------|------+------+------+------+------+------|
-|      |      |      |      |      |      | Reset||Reset |      |      |      |      |      |      |
+|Layer0|Layer0|Layer0|Layer0|Layer0|Layer0| Reset||Reset |Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|
 |------+------+------+------+------+------|      ||      |------+------+------+------+------+------|
-|      |      |      |      |      |      |------'`------|      |      |      |      |      |      |
+|Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|------'`------|Layer0|Layer0|Layer0|Layer0|Layer0|Layer0|
 `-----------------------------------------'              `-----------------------------------------'
 ```
 
