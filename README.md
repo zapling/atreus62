@@ -7,7 +7,7 @@ If you're interested in getting yourself an Atreus62 keyboards, it can be purcha
 
 ## About
 
-This is my custom layout which is based on the US keyboard layout with some extra modifications for the Swedish characters `åäö`. It consists of two layers where some special keys are accessible while holding the `FN` key. 
+This is my custom layout which is based on the US keyboard layout with some extra modifications for the Swedish characters `åäö`. It consists of three layers where some special keys are accessible while holding the `FN` key. 
 
 Input of Swedish characters under US layout is achieved with the unicode input mode that is available in Linux via (the `ctrl` + `shift` + `u`) key combination. You can read more about this at the [QMKs Unicode section](https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#input-modes).
 
@@ -41,9 +41,11 @@ make flash
 
 ## Layout
 
-The layout consists of two layers. The Function layer is accesible while holding the `Fn` key.
+The layout consists of three layers. The function layer is accesible while holding the `Fn` key.
 
 ### Layer: 0 (Normal)
+
+The default layer, has most of the keys that you would want.
 
 ```
 ,-----------------------------------------.              ,-----------------------------------------.
@@ -59,7 +61,9 @@ The layout consists of two layers. The Function layer is accesible while holding
 `-----------------------------------------'              `-----------------------------------------'
 ```
 
-### Layer: 1 (Fn)
+### Layer: 1 (Function)
+
+The function layer, has some special keys but also the arrow keys. They follow the vim-keys. A reset layer is also accesible in this layer.
 
 ```
 ,-----------------------------------------.              ,-----------------------------------------.
@@ -70,6 +74,24 @@ The layout consists of two layers. The Function layer is accesible while holding
 |      |      |      |      |      |      |              |  🠠  |   🠣   |   🠡   |  🠢  |  Ö  |   Ä  |
 |------+------+------+------+------+------|------.,------|------+------+------+------+------+------|
 |      |      |      |      |      |      |      ||      |      |      |      |      |      |      |
+|------+------+------+------+------+------|      ||      |------+------+------+------+------+------|
+|      |Layer2|      |      |      |      |------'`------|      |      |      |      |      |      |
+`-----------------------------------------'              `-----------------------------------------'
+```
+
+### Layer: 2 (Reset)
+
+The reset layer, only serves one function, reseting the keyboard so it can be flashed with new firmware. Don't press the reset button if you are not ready to flash new firmware, as this will "brick" your keyboard and make it unusable until you flash it.
+
+```
+,-----------------------------------------.              ,-----------------------------------------.
+|      |      |      |      |      |      |              |      |      |      |      |      |      |
+|------+------+------+------+------+------|              |------+------+------+------+------+------|
+|      |      |      |      |      |      |              |      |      |      |      |      |      |
+|------+------+------+------+------+------|              |------+------+------+------+------+------|
+|      |      |      |      |      |      |              |      |      |      |      |      |      |
+|------+------+------+------+------+------|------.,------|------+------+------+------+------+------|
+|      |      |      |      |      |      | Reset||Reset |      |      |      |      |      |      |
 |------+------+------+------+------+------|      ||      |------+------+------+------+------+------|
 |      |      |      |      |      |      |------'`------|      |      |      |      |      |      |
 `-----------------------------------------'              `-----------------------------------------'
