@@ -1,9 +1,9 @@
 ![Image of keyboard](keyboard.jpg)
 
 # qmk-atreus62
-Firmware for my Atreus62 keyboard.
+This is my custom firmware for my Atreus62 keyboard.
 
-If you're interested in getting yourself an Atreus62 keyboards it can be purchased from [Profet Keyboards](https://shop.profetkeyboards.com/product/atreus62-keyboard).
+If you're interested in getting yourself an Atreus62 keyboards, it can be purchased from [Profet Keyboards](https://shop.profetkeyboards.com/product/atreus62-keyboard). It can be purchased pre-assembled or with parts so you can assamble it your own.
 
 ## About
 
@@ -71,5 +71,8 @@ make flash
 `-----------------------------------------'              `-----------------------------------------'
 ```
 
+## License
 
-Feel free to use any code and implement it in your own layout.
+MIT Licence
+
+Andreas Palm 2020
