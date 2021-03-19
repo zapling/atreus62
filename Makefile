@@ -1,12 +1,22 @@
 current_dir = $(shell pwd)
 
-compile:
-		cd qmk_firmware && bin/./qmk compile -kb atreus62 -km zapling
-
-flash:
-		cd qmk_firmware && bin/./qmk flash -kb atreus62 -km zapling
-
+# Clone and setup QMK
 qmk:
-		[ ! -d "qmk_firmware" ] && git clone git@github.com:qmk/qmk_firmware.git
-		ln -s "$(current_dir)/zapling" "$(current_dir)/qmk_firmware/keyboards/atreus62/keymaps/"
-		cd qmk_firmware/ && make git-submodule
+		[ ! -d "qmk_firmware" ] && \
+			git clone --recurse-submodules git@github.com:qmk/qmk_firmware.git \
+		|| cd qmk_firmware && git pull
+
+# Copy the latest firmware changes to qmk folder
+copy-latest:
+		[ -d "qmk_firmware/keyboards/atreus62/keymaps/zapling" ] \
+			&& rm -rf qmk_firmware/keyboards/atreus62/zapling \
+		|| echo ""
+		cp -r zapling qmk_firmware/keyboards/atreus62/keymaps/.
+
+# Compile the firmware using docker
+compile: copy-latest
+		cd qmk_firmware && util/docker_build.sh atreus62:zapling
+
+# Compile and flash the firmware using docker
+flash: copy-latest
+		cd qmk_firmware && util/docker_build.sh atreus62:zapling:flash
