@@ -20,3 +20,6 @@ compile: copy-latest
 # Compile and flash the firmware using docker
 flash: copy-latest
 		cd qmk_firmware && util/docker_build.sh atreus62:zapling:flash
+
+build:
+	docker build . -t qmk-zapling
