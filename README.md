@@ -9,11 +9,7 @@ If you're interested in getting yourself an Atreus62 keyboards, it can be purcha
 
 This is my custom layout which is based on the US keyboard layout with some extra modifications for the Swedish characters `åäö`. It consists of three layers where some special keys are accessible while holding the `FN` key. 
 
-Input of Swedish characters under US layout is achieved with the unicode input mode that is available in Linux via (the `ctrl` + `shift` + `u`) key combination. You can read more about this at the [QMKs Unicode section](https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#input-modes).
-
-_This mode is not accesible under Windows, and therefore this layout might not work as expected for those users._
-
-Some applications behave unexpectedly when trying to input characters this way, resulting in some weird behaviour. To circumvent this, one workaround is to temporarily change the keyboard layout to Swedish in your OS. If you know a better way, please consider creating a PR.
+Input of Swedish characters under US layout is achieved with the usage of `compose` key. You can read more about this at the [Arch wiki](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration#Configuring_compose_key).
 
 ## Installation
 
