@@ -13,17 +13,17 @@ enum custom_keys {
   KEY_EUR
 };
 
-// Custom unicode characters
-const char LOWER_A_DIACRITIC[] = "0x00e5"; // å
-const char UPPER_A_DIACRITIC[] = "0x00c5"; // Å
+// Custom keys with compose-key instructions
+const char LOWER_A_DIACRITIC[] = "oa"; // å
+const char UPPER_A_DIACRITIC[] = "oA"; // Å
 
-const char LOWER_A_DIAERESIS[] = "0x00e4"; // ä
-const char UPPER_A_DIAERESIS[] = "0x00c4"; // Ä
+const char LOWER_A_DIAERESIS[] = "\"a"; // ä
+const char UPPER_A_DIAERESIS[] = "\"A"; // Ä
 
-const char LOWER_O_DIAERESIS[] = "0x00f6"; // ö
-const char UPPER_O_DIAERESIS[] = "0x00d6"; // Ö
+const char LOWER_O_DIAERESIS[] = "\"o"; // ö
+const char UPPER_O_DIAERESIS[] = "\"O"; // Ö
 
-const char EURO_SIGN[] = "0x20ac"; // €
+const char EURO_SIGN[] = "=e"; // €
 
 /**
 * Return true if the shift modifier pressed
@@ -35,23 +35,47 @@ bool is_shift_pressed(void) {
   return false;
 }
 
-/**
-* Print a custom unicode character
-* Uses the linux unicode input mode in order to convert the unicode to a real character.
-* This might not always work, depending on the application.
-*
-* Uses the function 'send_string' in lowercase that allows for a char param.
-*/
-void print_unicode_char(const char* chars) {
-  SEND_STRING(
-    SS_DOWN(X_LCTL)
-    SS_DOWN(X_LSFT)
-    "u"
-    SS_UP(X_LCTL)
-    SS_UP(X_LSFT)
-  );
-  send_string(chars);
-  SEND_STRING(SS_TAP(X_ENT));
+struct Shift_States {
+    bool LeftShift;
+    bool RightShift;
+};
+
+struct Shift_States get_shift_states(void) {
+    struct Shift_States state = {
+        keyboard_report->mods & MOD_BIT(KC_LSFT),
+        keyboard_report->mods & MOD_BIT(KC_RSFT)
+    };
+    return state;
+}
+
+/*
+ * Uses compose key to get characters that are not usally accessable under US layout.
+ * Relieas on that 'X_APP' aka Menu button is set as the compose key in OS.
+ * See https://wiki.archlinux.org/title/Xorg/Keyboard_configuration#Configuring_compose_key
+ *
+ * Will release all shift modifiers temporarily and return it's state when done.
+ */
+void compose_character(const char* chars) {
+    struct Shift_States state = get_shift_states();
+
+    // release shift modifiers
+    if (state.LeftShift == true) {
+        SEND_STRING(SS_UP(X_LSFT));
+    }
+    if (state.RightShift == true) {
+        SEND_STRING(SS_UP(X_RSFT));
+    }
+
+    SEND_STRING(SS_TAP(X_APP));
+    send_string(chars);
+
+    // return shift modifiers
+    if (state.LeftShift == true) {
+        SEND_STRING(SS_DOWN(X_LSFT));
+    }
+    if (state.RightShift == true) {
+        SEND_STRING(SS_DOWN(X_RSFT));
+    }
 }
 
 /**
@@ -61,25 +85,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_A_DIACRITIC: // å key
       if (record->event.pressed) {
-        is_shift_pressed() ? print_unicode_char(UPPER_A_DIACRITIC) : print_unicode_char(LOWER_A_DIACRITIC);
+        is_shift_pressed() ? compose_character(UPPER_A_DIACRITIC) : compose_character(LOWER_A_DIACRITIC);
       }
       break;
 
     case KC_A_DIAERESIS: // ä key
       if (record->event.pressed) {
-        is_shift_pressed() ? print_unicode_char(UPPER_A_DIAERESIS) : print_unicode_char(LOWER_A_DIAERESIS);
+        is_shift_pressed() ? compose_character(UPPER_A_DIAERESIS) : compose_character(LOWER_A_DIAERESIS);
       }
       break;
 
     case KC_O_DIAERESIS: // ö key
       if (record->event.pressed) {
-        is_shift_pressed() ? print_unicode_char(UPPER_O_DIAERESIS) : print_unicode_char(LOWER_O_DIAERESIS);
+        is_shift_pressed() ? compose_character(UPPER_O_DIAERESIS) : compose_character(LOWER_O_DIAERESIS);
       }
       break;
 
     case KEY_EUR: // €
       if (record->event.pressed) {
-        print_unicode_char(EURO_SIGN);
+        compose_character(EURO_SIGN);
       }
   }
   return true;
