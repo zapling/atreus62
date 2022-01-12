@@ -11,6 +11,12 @@ This is my custom layout which is based on the US keyboard layout with some extr
 
 Input of Swedish characters under US layout is achieved with the usage of `compose` key. You can read more about this at the [Arch wiki](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration#Configuring_compose_key).
 
+### Setup compose key on linux
+
+```
+setxkbmap -option compose:menu
+```
+
 ## Installation
 
 Installing this layout to your keyboard consists of two steps, compiling and flashing, but first you need to get the [QMK Firmware](https://github.com/qmk/qmk_firmware). It can easily be installed via the following command.
